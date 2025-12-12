@@ -27,22 +27,6 @@
                     <a href="settings.html">Settings</a>
                     <a href="billing.html">Billing</a>
                 </div>
-                <div class="user-menu">
-                    <div class="user-avatar" id="user-avatar" onclick="toggleUserMenu()">
-                        <span id="user-initials">JD</span>
-                    </div>
-                    <div class="user-dropdown" id="user-dropdown">
-                        <div class="user-info">
-                            <div class="user-name" id="user-name">John Doe</div>
-                            <div class="user-email" id="user-email">john@example.com</div>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <a href="settings.html" class="dropdown-item">Settings</a>
-                        <a href="billing.html" class="dropdown-item">Billing</a>
-                        <div class="dropdown-divider"></div>
-                        <a href="#" class="dropdown-item" onclick="handleLogout()">Sign Out</a>
-                    </div>
-                </div>
             </div>
         </div>
     </nav>
@@ -107,10 +91,7 @@
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
 
-    <script src="auth.js"></script>
-    <script src="nav.js"></script>
     <script>
-        initNav();
         function handleInvite(event) {
             event.preventDefault();
             const email = document.getElementById('invite-email').value;
