@@ -27,6 +27,22 @@
                     <a href="settings.html" class="active">Settings</a>
                     <a href="billing.html">Billing</a>
                 </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="user-avatar" onclick="toggleUserMenu()">
+                        <span id="user-initials">JD</span>
+                    </div>
+                    <div class="user-dropdown" id="user-dropdown">
+                        <div class="user-info">
+                            <div class="user-name" id="user-name">John Doe</div>
+                            <div class="user-email" id="user-email">john@example.com</div>
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        <a href="settings.html" class="dropdown-item">Settings</a>
+                        <a href="billing.html" class="dropdown-item">Billing</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="#" class="dropdown-item" onclick="handleLogout()">Sign Out</a>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>
@@ -41,11 +57,11 @@
             <form id="profile-form" class="settings-form">
                 <div class="form-group">
                     <label for="profile-name">Name</label>
-                    <input type="text" id="profile-name" name="profile-name" value="John Doe">
+                    <input type="text" id="profile-name" name="profile-name" required>
                 </div>
                 <div class="form-group">
                     <label for="profile-email">Email</label>
-                    <input type="email" id="profile-email" name="profile-email" value="john@example.com">
+                    <input type="email" id="profile-email" name="profile-email" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Save Changes</button>
             </form>
@@ -99,7 +115,31 @@
     <!-- Toast Container -->
     <div id="toast-container" class="toast-container"></div>
 
+    <script src="auth.js"></script>
+    <script src="nav.js"></script>
     <script>
+        initNav();
+        
+        // Load user data into form
+        const user = auth.getUser();
+        if (user) {
+            document.getElementById('profile-name').value = user.name;
+            document.getElementById('profile-email').value = user.email;
+        }
+
+        // Handle profile form submission
+        document.getElementById('profile-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('profile-name').value;
+            const email = document.getElementById('profile-email').value;
+            
+            if (auth.updateProfile({ name, email })) {
+                showToast('Profile updated successfully!');
+                // Update nav
+                initNav();
+            }
+        });
+
         document.getElementById('delete-workspace-btn').addEventListener('click', () => {
             document.getElementById('delete-modal').style.display = 'flex';
         });
