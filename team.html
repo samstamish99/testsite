@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamOps Demo - Team</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function () {
+            var gp = document.createElement('script');
+            gp.src = "https://onboarding-app-olive.vercel.app/snippet/loader.js";
+            gp.async = true;
+            gp.dataset.siteKey = "218fad9f0209e36ca34c6154845c9585";
+            document.head.appendChild(gp);
+        })();
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <h1 class="logo">TeamOps</h1>
+                <div class="nav-links">
+                    <a href="index.html">Dashboard</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="team.html" class="active">Team</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="billing.html">Billing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2>Team</h2>
+        </div>
+
+        <div class="invite-section">
+            <h3>Invite Teammate</h3>
+            <form id="invite-form" onsubmit="handleInvite(event)" class="invite-form">
+                <div class="form-group">
+                    <label for="invite-email">Email</label>
+                    <input type="email" id="invite-email" name="invite-email" placeholder="colleague@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="invite-role">Role</label>
+                    <select id="invite-role" name="invite-role" required>
+                        <option value="">Select role</option>
+                        <option value="admin">Admin</option>
+                        <option value="member">Member</option>
+                        <option value="viewer">Viewer</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Invite</button>
+            </form>
+        </div>
+
+        <div class="team-list">
+            <h3>Team Members</h3>
+            <div class="team-member">
+                <div class="member-info">
+                    <div class="member-avatar">JD</div>
+                    <div>
+                        <h4>John Doe</h4>
+                        <p>john@example.com • Admin</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-info">
+                    <div class="member-avatar">JS</div>
+                    <div>
+                        <h4>Jane Smith</h4>
+                        <p>jane@example.com • Member</p>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="member-info">
+                    <div class="member-avatar">MJ</div>
+                    <div>
+                        <h4>Mike Johnson</h4>
+                        <p>mike@example.com • Member</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+        function handleInvite(event) {
+            event.preventDefault();
+            const email = document.getElementById('invite-email').value;
+            const role = document.getElementById('invite-role').value;
+            
+            showToast('Invite sent to ' + email);
+            document.getElementById('invite-form').reset();
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.getElementById('toast-container').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
+

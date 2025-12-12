@@ -1,36 +1,10 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TeamOps Demo</title>
-    <script>
-      (function () {
-        var gp = document.createElement("script");
-        gp.src = "https://onboarding-app-olive.vercel.app/snippet/loader.js";
-        gp.async = true;
-        gp.dataset.siteKey = "218fad9f0209e36ca34c6154845c9585";
-        document.head.appendChild(gp);
-      })();
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
-</html>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <base href="/testsite/">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GuidePilot Demo Site - Home</title>
-   
-    <!-- Remove leading slash -->
+    <title>TeamOps Demo - Dashboard</title>
     <link rel="stylesheet" href="styles.css">
-
-    <!-- GuidePilot Snippet -->
     <script>
         (function () {
             var gp = document.createElement('script');
@@ -39,68 +13,53 @@
             gp.dataset.siteKey = "218fad9f0209e36ca34c6154845c9585";
             document.head.appendChild(gp);
         })();
-        </script>
+    </script>
 </head>
-
 <body>
-    <header>
+    <nav class="navbar">
         <div class="container">
-            <div class="header-content">
-                <h1 class="logo">DemoApp</h1>
-                <nav>
-                    <!-- These should also be relative -->
-                    <a href="/">Home</a>
-                    <a href="dashboard.html">Dashboard</a>
-                    <a href="analytics.html">Analytics</a>
+            <div class="nav-content">
+                <h1 class="logo">TeamOps</h1>
+                <div class="nav-links">
+                    <a href="index.html" class="active">Dashboard</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="team.html">Team</a>
                     <a href="settings.html">Settings</a>
-                </nav>
+                    <a href="billing.html">Billing</a>
+                </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <h2>Welcome to DemoApp</h2>
-                <p>This is a demo website to test GuidePilot's guided product tours</p>
-                <div class="hero-buttons">
-                    <button id="get-started-btn" class="btn btn-primary">Get Started</button>
-                    <a href="dashboard.html" class="btn btn-secondary">View Dashboard</a>
-                </div>
-            </div>
-        </section>
+    <main class="container">
+        <div class="page-header">
+            <h2>Welcome back!</h2>
+            <button class="btn btn-primary" id="create-project-btn">Create Project</button>
+        </div>
 
-        <section class="features">
-            <div class="container">
-                <h3>Key Features</h3>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <h4>Easy to Use</h4>
-                        <p>Simple and intuitive interface for everyone</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>Powerful Tools</h4>
-                        <p>Everything you need to succeed</p>
-                    </div>
-                    <div class="feature-card">
-                        <h4>Great Support</h4>
-                        <p>We're here to help you 24/7</p>
-                    </div>
-                </div>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <h3>12</h3>
+                <p>Active Projects</p>
             </div>
-        </section>
+            <div class="stat-card">
+                <h3>8</h3>
+                <p>Team Members</p>
+            </div>
+            <div class="stat-card">
+                <h3>24</h3>
+                <p>Tasks Completed</p>
+            </div>
+            <div class="stat-card">
+                <h3>95%</h3>
+                <p>On Time Rate</p>
+            </div>
+        </div>
     </main>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2024 DemoApp. All rights reserved.</p>
-        </div>
-    </footer>
-
     <script>
-        document.getElementById('get-started-btn').addEventListener('click', () => {
-            // Also remove leading slash here
-            window.location.href = 'dashboard.html';
+        document.getElementById('create-project-btn').addEventListener('click', () => {
+            window.location.href = 'projects.html';
         });
     </script>
 </body>

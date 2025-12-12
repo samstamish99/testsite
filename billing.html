@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TeamOps Demo - Billing</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        (function () {
+            var gp = document.createElement('script');
+            gp.src = "https://onboarding-app-olive.vercel.app/snippet/loader.js";
+            gp.async = true;
+            gp.dataset.siteKey = "218fad9f0209e36ca34c6154845c9585";
+            document.head.appendChild(gp);
+        })();
+    </script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <h1 class="logo">TeamOps</h1>
+                <div class="nav-links">
+                    <a href="index.html">Dashboard</a>
+                    <a href="projects.html">Projects</a>
+                    <a href="team.html">Team</a>
+                    <a href="settings.html">Settings</a>
+                    <a href="billing.html" class="active">Billing</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="page-header">
+            <h2>Billing</h2>
+        </div>
+
+        <div class="plan-card">
+            <h3>Current Plan</h3>
+            <div class="plan-details">
+                <h4>Free Plan</h4>
+                <p>$0/month</p>
+                <ul>
+                    <li>Up to 5 projects</li>
+                    <li>3 team members</li>
+                    <li>Basic features</li>
+                </ul>
+                <button class="btn btn-primary" id="upgrade-plan-btn">Upgrade Plan</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upgrade Modal -->
+    <div id="upgrade-modal" class="modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3>Upgrade Plan</h3>
+                <button class="modal-close" onclick="closeModal('upgrade-modal')">&times;</button>
+            </div>
+            <div class="pricing-options">
+                <div class="pricing-card">
+                    <h4>Pro</h4>
+                    <div class="price">$29<span>/month</span></div>
+                    <ul>
+                        <li>Unlimited projects</li>
+                        <li>10 team members</li>
+                        <li>Advanced features</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('pro')">Select Pro</button>
+                </div>
+                <div class="pricing-card featured">
+                    <h4>Enterprise</h4>
+                    <div class="price">$99<span>/month</span></div>
+                    <ul>
+                        <li>Unlimited projects</li>
+                        <li>Unlimited members</li>
+                        <li>All features</li>
+                        <li>Priority support</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('enterprise')">Select Enterprise</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="payment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Payment Information</h3>
+                <button class="modal-close" onclick="closeModal('payment-modal')">&times;</button>
+            </div>
+            <form id="payment-form" onsubmit="handlePayment(event)">
+                <div class="form-group">
+                    <label for="card-number">Card Number</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9012 3456" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="card-expiry">Expiry Date</label>
+                        <input type="text" id="card-expiry" name="card-expiry" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="card-cvv">CVV</label>
+                        <input type="text" id="card-cvv" name="card-cvv" placeholder="123" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="card-name">Cardholder Name</label>
+                    <input type="text" id="card-name" name="card-name" placeholder="John Doe" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('payment-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script>
+        document.getElementById('upgrade-plan-btn').addEventListener('click', () => {
+            document.getElementById('upgrade-modal').style.display = 'flex';
+        });
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        function selectPlan(plan) {
+            closeModal('upgrade-modal');
+            document.getElementById('payment-modal').style.display = 'flex';
+        }
+
+        function handlePayment(event) {
+            event.preventDefault();
+            closeModal('payment-modal');
+            showToast('Payment processed successfully!');
+            document.getElementById('payment-form').reset();
+        }
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.textContent = message;
+            document.getElementById('toast-container').appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 10);
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        window.onclick = function(event) {
+            const modals = ['upgrade-modal', 'payment-modal'];
+            modals.forEach(modalId => {
+                const modal = document.getElementById(modalId);
+                if (event.target === modal) {
+                    closeModal(modalId);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
